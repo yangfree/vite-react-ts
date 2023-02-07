@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-function __resolve(dir: string) {
+function resolvePath (dir: string) {
   return path.resolve(__dirname, dir)
 }
 
@@ -12,8 +12,17 @@ export default defineConfig({
   // 配置项目别名
   resolve: {
     alias: {
-      '@': __resolve('src'),
-      '@css': __resolve('src/testcss'),
+      '@': resolvePath('src'),
+      '@css': resolvePath('src/testcss')
+    }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8085',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   }
 })
