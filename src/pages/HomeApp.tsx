@@ -1,15 +1,22 @@
-import React, { useState } from 'react'
-// import reactLogo from './assets/react.svg'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement } from '../store/counterSlice'
+import { type RootState } from '../store/index'
 
 function HomeApp () {
-  const [count, setCount] = useState(0)
+  const count = useSelector((state: RootState) => state.value)
+  const dispatch = useDispatch()
 
   return (
     <div className="App">
       <h1>Vite + React + Ts + Pnpm</h1>
       <div className="card">
-        <button onClick={() => { setCount((count) => count + 1) }}>
-          count is {count}
+        { count }
+        <button onClick={() => { dispatch(increment()) }}>
+          increment++
+        </button>
+        <button onClick={() => { dispatch(decrement()) }}>
+          decrement--
         </button>
         </div>
     </div>
