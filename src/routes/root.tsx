@@ -1,11 +1,12 @@
 import HomeApp from '../pages/HomeApp'
 import { Outlet, Link, NavLink } from 'react-router-dom'
+import navbarModuleCss from '../testcss/navbar.module.less'
 
 export default function Root () {
   return (
     < >
-      <nav>
-        <ul>
+      <nav className={navbarModuleCss.navbar}>
+        <ul className={navbarModuleCss.navbar_ul}>
           <li>
             <NavLink to='/' style={({ isActive }) => ({ color: isActive ? 'red' : 'skyblue' })}> 首页 </NavLink>
           </li>
